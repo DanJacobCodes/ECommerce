@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
-belongs_to :user
+# belongs_to :user
+
 has_many :order_items
 before_save :update_total
 before_create :update_status
@@ -9,6 +10,7 @@ before_create :update_status
   end
 
   private
+
   def update_status
     if self.status == nil?
       self.status = "In progress"
