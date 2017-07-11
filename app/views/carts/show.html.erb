@@ -9,3 +9,10 @@
 <% else %>
   <p>Your shopping cart is empty.</p>
 <% end %>
+
+<h4>Saved For Later</h4>
+<% if @pinned_products.any? %>
+  <% @pinned_products.each do |product| %>
+  <%= Product.find(product.product_id).name %>
+  <% end %>
+<% end %>

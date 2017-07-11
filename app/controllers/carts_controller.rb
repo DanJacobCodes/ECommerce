@@ -2,6 +2,10 @@ class CartsController < ApplicationController
 
   def show
     @order_items = current_order.order_items
+
+    @pinned_products = PinnedProduct.all
+
+
   end
 
   def order_complete

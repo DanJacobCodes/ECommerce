@@ -3,11 +3,14 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!, except: [:index]
   helper_method :current_order
+  helper_method :current_user
 
 
   def index
-    
+
   end
+
+
 
 
 
@@ -25,4 +28,6 @@ class ApplicationController < ActionController::Base
       Order.new
     end
   end
+
+
 end
