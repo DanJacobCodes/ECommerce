@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
     if @product.save
       flash[:notice] = "Product added succesfully!"
       respond_to do |format|
-        format.html ( redirect_to products_path)
+        format.html { redirect_to products_path }  
         format.js
       end
     else
