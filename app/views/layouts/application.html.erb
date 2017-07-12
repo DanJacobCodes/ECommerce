@@ -38,6 +38,7 @@
 </nav>
 <li>
   <%= link_to "Add a Product", new_product_path, id:"new_product_link", class:"btn btn_default", remote: true %>
+  <%= flash[:notice] %>
     <%= yield %>
   </div>
   </body>
