@@ -5,7 +5,6 @@ class ProductsController < ApplicationController
 
 
   def index
-
     @products = Product.all
     @order_item = current_order.order_items.new
     @pinned_product = PinnedProduct.new
@@ -30,7 +29,15 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to products_path
+  end
 
+  def show
+    @product = Product.find(params[:id])
+  end
 
 
   private

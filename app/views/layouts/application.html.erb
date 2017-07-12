@@ -9,37 +9,40 @@
   </head>
 
   <body>
-   <div class="container">
+    <div class="container">
+      <nav class="navbar navbar-inverse bg-primary">
 
+        <% if current_user %>
 
-<nav class="navbar navbar-inverse bg-primary">
-<% if current_user %>
-<ul class="navbar-nav mr-auto">
-<li id="home"><%= link_to 'Home', root_path %></li>
-<li class="nav-item nav-link" ><%= link_to 'Sign Out', destroy_user_session_path, method: 'delete' %></li>
-<li class="nav-item">  <%= link_to 'Settings', edit_user_registration_path %>
-</li>
-<li class="nav-item"><%= link_to 'All Products', products_path %></li>
-<li class="nav-item"><%= link_to 'My Cart', cart_path %></li>
-<li class="nav-item">  Cart Total: <%= number_to_currency current_order.total_price %>
-</li>
+          <ul class="navbar-nav mr-auto">
+            <li id="home"><%= link_to 'Home', root_path %></li>
+            <li class="nav-item nav-link" ><%= link_to 'Sign Out', destroy_user_session_path, method: 'delete' %></li>
+            <li class="nav-item">  <%= link_to 'Settings', edit_user_registration_path %>
+            </li>
+            <li class="nav-item"><%= link_to 'All Products', products_path %></li>
+            <li class="nav-item"><%= link_to 'My Cart', cart_path %></li>
+            <li class="nav-item">  Cart Total: <%= number_to_currency current_order.total_price %>
+            </li>
+            <li class="nav-item" id="products_in_cart"> <%= current_order.order_items.length %> Products in Ca
+            </li>
 
-<li class="nav-item" id="products_in_cart"> <%= current_order.order_items.length %> Products in Ca
-</li>
-<% else %>
-<li class="nav-item"><%= link_to 'Sign Up', new_user_registration_path  %></li>
-<li class="nav-item"><%= link_to 'Sign In', new_user_session_path  %></li>
-<% end %>
-<% if current_user && current_user.admin %>
-</li>
+          <% else %>
 
-<% end %>
-</ul>
-</nav>
-<li>
-  <%= link_to "Add a Product", new_product_path, id:"new_product_link", class:"btn btn_default", remote: true %>
-  <%= flash[:notice] %>
-    <%= yield %>
-  </div>
+            <li class="nav-item"><%= link_to 'Sign Up', new_user_registration_path  %></li>
+            <li class="nav-item"><%= link_to 'Sign In', new_user_session_path  %></li>
+
+          <% end %>
+
+          <% if current_user && current_user.admin %>
+
+            <%= link_to "Add a Product", new_product_path, id:"new_product_link", class:"btn btn_default", remote: true %>
+
+          <% end %>
+
+        </ul>
+      </nav>
+      <%= flash[:notice] %>
+      <%= yield %>
+    </div>
   </body>
 </html>
