@@ -3,12 +3,12 @@
 <%= form_for @order_item do |f| %>
   <%= f.hidden_field :product_id, value: product.id %>
   <%= f.number_field :quantity %>
-  <%= f.submit "Add to Cart" %>
+  <%= f.submit "Add to Cart", class:"btn btn-success" %>
   <% end %></p>
   <%= form_for @pinned_product do |f| %>
     <%= f.hidden_field :product_id, value: product.id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.submit "Save this product" %>
+    <%= f.submit "Save this product",class: 'btn btn-warning' %>
     <% end %></p>
 
 <% end %>

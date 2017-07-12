@@ -1,4 +1,8 @@
 class ProductsController < ApplicationController
+  before_action :only => [:new] do
+  redirect_to new_user_session_path unless current_user && current_user.admin
+  end
+
 
   def index
 
@@ -16,13 +20,17 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to products_path
+      flash[:notice] = "Product added succesfully!"
+      respond_to do |format|
+        format.html ( redirect_to products_path)
+        format.js
+      end
     else
       render :new
     end
   end
 
-  
+
 
 
   private

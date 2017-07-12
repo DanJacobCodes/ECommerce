@@ -4,7 +4,7 @@
     <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
   <% end %>
   <p>Your Total: <%= number_to_currency current_order.total_price %></p>
-  <button><%= link_to 'Checkout', '/charges/new' %></button>
+  <button class="btn btn-outline-primary"><%= link_to 'Checkout', '/charges/new' %></button>
 
 <% else %>
   <p>Your shopping cart is empty.</p>
@@ -15,6 +15,15 @@
   <% @pinned_products.each do |product| %>
   <% if product.user_id === current_user.id %>
   <%= Product.find(product.product_id).name %>
+  <p>
+    Add Product to your cart <br>
+    <%= form_for @order_item do |f| %>
+      <%= f.hidden_field :product_id, value: Product.find(product.product_id).id %>
+      <%= f.number_field :quantity %>
+      <%= f.submit "Add to Cart", class: 'btn btn-success'%>
+      <% end %></p>
+
+  </p>
     <% end %>
   <% end %>
 <% end %>
