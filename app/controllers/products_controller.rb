@@ -31,12 +31,19 @@ class ProductsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:id])
-      @product.destroy
-      if  OrderItem.find_by(:product_id => @product.id)
-    @order_item = OrderItem.find_by(:product_id => @product.id)
 
-    @order_item.destroy
-  end
+    if  OrderItem.find_by(:product_id => @product.id)
+      @order_item = OrderItem.find_by(:product_id => @product.id)
+
+      @order_item.destroy
+    end
+    if PinnedProduct.find_by(:product_id => @product.id)
+      @pinned_product = PinnedProduct.find_by(:product_id => @product.id)
+      @pinned_product.destroy
+    end
+    @product.destroy
+    @order_items = OrderItem.all
+    @order_item.update_total
 
     redirect_to products_path
   end

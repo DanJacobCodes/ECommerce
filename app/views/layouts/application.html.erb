@@ -21,9 +21,15 @@
             </li>
             <li class="nav-item"><%= link_to 'All Products', products_path %></li>
             <li class="nav-item"><%= link_to 'My Cart', cart_path %></li>
-            <li class="nav-item">  Cart Total: <%= number_to_currency current_order.total_price %>
+
+            <li class="nav-item">  Cart Total:
+              <% if current_order.order_items %>
+                <%= number_to_currency current_order.total_price %>
+              <% else %>
+                <%= number_to_currency current_order.total_price %>
+              <% end %>
             </li>
-            <li class="nav-item" id="products_in_cart"> <%= current_order.order_items.length %> Products in Ca
+            <li class="nav-item" id="products_in_cart"> <%= current_order.order_items.length %> Products in Cart
             </li>
 
           <% else %>
@@ -33,17 +39,18 @@
 
           <% end %>
 
-          <% if current_user && current_user.admin %>
 
 
-          <% end %>
+
+
 
         </ul>
       </nav>
       <%= flash[:notice] %>
       <%= yield %>
-
-                  <%= link_to "Add a Product", new_product_path, id:"new_product_link", class:"btn btn_default", remote: true %>
+      <% if current_user && current_user.admin %>
+          <%= link_to "Add a Product", new_product_path, id:"new_product_link", class:"btn btn_default", remote: true %>
+      <% end %>
     </div>
   </body>
 </html>
