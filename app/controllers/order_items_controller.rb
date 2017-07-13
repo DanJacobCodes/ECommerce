@@ -2,11 +2,15 @@ class OrderItemsController < ApplicationController
 
   def create
     @order = current_order
-    @item = @order.order_items.new(item_params)
-    @order.save
-    session[:order_id] = @order.id
-    redirect_to products_path
-
+    @order_item = @order.order_items.new(item_params)
+    if @order_item.save
+      redirect_to products_path
+    else
+      @products = Product.all
+      @pinned_product = PinnedProduct.new
+      session[:order_id] = @order.id
+      render 'products/index'
+    end
   end
 
   def destroy

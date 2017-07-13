@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:index]
   helper_method :current_order
   helper_method :current_user
+  before_action :only => [:rails_admin] do
+  redirect_to new_user_session_path unless current_user && current_user.admin
+  end
 
 
   def index
